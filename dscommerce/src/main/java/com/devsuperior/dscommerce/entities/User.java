@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity //Declara que a classe é uma entidade JPA, que será mapeada para uma tabela no banco de dados.
 @Table(name = "tb_user") //Especifica o nome da tabela no banco de dados.
@@ -84,5 +85,18 @@ public User() {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
